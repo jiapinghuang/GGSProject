@@ -1,0 +1,81 @@
+body{
+	color: white;
+	background: black;
+	 overflow: hidden;
+}
+*{
+	margin: 0;
+	padding: 0;
+}
+#music{
+	width: 980px;
+	height: 600px;
+	margin:  0 auto;
+	
+	position: relative;
+	border-radius: 10%;
+}
+#music ul{
+	left: 20%;
+	top: 45%;
+	position: absolute;
+	
+}
+#music ul li{
+	width: 80px;
+	height: 300px;
+	float: left;
+	background: white;
+	color: black;
+	list-style: none;
+	text-align: center;
+	border: 1px solid black;
+	line-height: 300px;
+	font-size: 20px;
+	box-shadow: -10px -10px 80px -4px #6698cb inset;	
+	position: relative; 
+	
+}
+.move_li{
+	animation: move 1s;
+}
+@keyframes move{
+	from{
+		transform:translateY(0%);
+		opacity: 0;
+	}
+	to{
+		transform:translateY(-70%);
+		opacity: 0.7;
+	}
+}
+
+.snow{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: white;
+	position: absolute;
+}
+.ballboon{
+	width: 60px;
+	height: 60px;	
+	position: absolute;
+	border-radius:  160px  160px   64px    160px;
+	transform: rotate(45deg);
+	box-shadow: -8px -8px 80px -8px #7fccde inset;/*水平、垂直、模糊距离、阴影大小、内阴影*/
+	top:100%;
+	animation: ballmove 4s;
+	display: none;
+}
+
+@keyframes ballmove{
+	from{
+		transform: translateY(0%);
+		opacity: 1;
+	}
+	to{
+		transform: translateY(-800%);
+		opacity: 0.2;
+	}
+}

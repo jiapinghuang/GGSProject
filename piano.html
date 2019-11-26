@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/piano.css" type="text/css" />
+		<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+	</head>
+	<body>
+		<div id="music">
+			<ul>
+				<li><div class="ballboon">请点击</div><span>1</span></li>
+				<li><div class="ballboon">请点击</div><span>2</span></li>
+				<li><div class="ballboon">请点击</div><span>3</span></li>
+				<li><div class="ballboon">请点击</div><span>4</span></li>
+				<li><div class="ballboon">请点击</div><span>5</span></li>
+				<li><div class="ballboon">请点击</div><span>6</span></li>
+				<li><div class="ballboon">请点击</div><span>7</span></li>
+			</ul>
+		</div>
+		
+		
+		<script type="text/javascript">
+			
+			$('li').mouseover(function(){
+				$(this).find('.ballboon').css('display','block');	
+			});
+			$('li').mouseout(function(){
+				$(this).find('.ballboon').css('display','none');		
+			});
+			
+			//鼠标按下
+			$('li').mousedown(function(){	
+				debugger;
+				//拼接路径
+				var src = "./music/"+$(this).find('span').html()+'.mp3';
+				$(this).css("background","#fa5a5a");
+				$(this).removeClass("move_li");
+				var music=new Audio(src);
+				music.play();			
+			});
+			
+			//鼠标抬起
+			$('li').mouseup(function(){
+				$(this).css("background","white");
+				
+				$(this).addClass("move_li");
+			});
+			
+			$(function(){
+				for(var i=0;i<50;i++){
+					createSnow(i);
+				}
+				
+			});
+			//生成雪花
+//			动态创建若干个div设置其样式变成雪花，通过setInterval定时器控制雪花移动，
+//			当雪花跑到屏幕外面重新让雪花的left或者top为0，
+//			使雪花重新回到最左或者最上面的位置，从而实现。
+			var windowWidth=window.screen.width;
+			var windowHeight=window.screen.height;
+			function createSnow(index){
+				//定义div
+				var div=document.createElement("div");
+				
+			
+				div.className='snow';
+				div.style.transform= 'scale('+(Math.random())+')';
+							
+				document.body.appendChild(div);
+				
+				//雪花飘落，用setInterval修改left、top
+				var left1=0;
+				var top1=0;
+				
+				
+				//定义初始雪花位置
+				var random_left=Math.random()*windowWidth;
+				var random_top=Math.random()*windowHeight;
+				
+				//定时生成
+				setInterval(function(){
+					div.style.left=random_left+left1+'px';
+					div.style.top=random_top+top1+'px';
+					
+					if(index%2==0){
+						var color=changeColor();
+						div.style.background=color;
+					}
+					
+					
+					left1=left1+0.2;
+					top1=top1+0.2;
+					//超过屏幕，位置重置
+					if(random_left+left1>windowWidth){
+						random_left=Math.random();
+						left1=0;
+					}
+					if(random_top+top1>windowHeight){
+						random_top=Math.random();
+						top1=0;
+					}
+				},20);																							
+			}
+			
+			//随机生成颜色
+			function changeColor(){
+				var rgb= ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+				var random=0;
+				var str="#";
+				for(var i=0;i<6;i++){
+					random=parseInt(Math.random()*16);//生成0到16的随机数
+					str=str+rgb[random];
+				}
+				return str;
+			}
+		</script>
+	</body>
+</html>
